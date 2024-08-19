@@ -1,7 +1,11 @@
+require('dotenv').config();
 const express = require("express");
 const tasks = require("./routes/tasks");
+const connectDB = require("./db/connect")
 const port = 3000;
+const MONGODB_URI = process.env.MONGODB_URI
 const app = express();
+
 
 // Middleware
 app.use(express.json());
@@ -14,6 +18,14 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/tasks", tasks);
 
-app.listen(port, () => {
-  console.log(`Server rup and running on port ${port} localhost:3000`);
-});
+const start = async () => {
+  try {
+    await connectDB(MONGODB_URI)
+    app.listen(port, () => console.log(`Server rup and running on port ${port} localhost:3000`));
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+start()
