@@ -9,13 +9,9 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-
+app.use(express.static("./public"))
 
 // Routes
-app.get("/", (req, res) => {
-  res.send("<h1>Task Manger App!</h1>")
-})
-
 app.use("/api/v1/tasks", tasks);
 
 const start = async () => {
