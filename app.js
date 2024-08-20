@@ -22,10 +22,8 @@ const start = async () => {
   try {
     await connectDB(MONGODB_URI)
     app.listen(port, () => console.log(`Server up and running on port ${port} localhost:3000`));
-
   } catch (error) {
     console.log(error);
   }
 }
-
 start()
