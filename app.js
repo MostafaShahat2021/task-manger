@@ -5,6 +5,7 @@ const connectDB = require("./db/connect")
 const port = process.env.PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI
 const app = express();
+const notFound = require("./middleware/notFound")
 
 
 // Middleware
@@ -13,6 +14,7 @@ app.use(express.static("./public"))
 
 // Routes
 app.use("/api/v1/tasks", tasks);
+app.use(notFound)
 
 const start = async () => {
   try {
